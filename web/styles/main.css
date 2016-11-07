@@ -1,0 +1,93 @@
+/* 
+  Copyright (c) 2016 Harrison Durant, Stephanie Scro
+*/
+
+body {
+  border: 0.2em solid darkblue;
+  color: black;
+  font-size: 100%;
+  margin: 1% 10%;
+  width: 80%;
+}
+
+h1, h2 {
+  color: darkblue;
+  font-size: 1.8em;
+}
+
+#main {
+  margin: 0 3%;
+  width: 94%;
+}
+
+table {
+  margin: 1.5em 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tr {
+  display: flex;
+}
+
+td {
+  flex-basis: 50%;
+  padding: 0.4em 0.5em;
+  width: 50%;
+}
+
+td p {
+  margin: 0;
+}
+
+td:nth-child(1) {
+  text-align: right;
+}
+
+td input {
+  width: 100%;
+}
+
+td input[type="submit"] {
+  border-radius: 0;
+  border: 0.1em solid black;
+  background-color: lightgray;
+  width: 50%;
+}
+
+#footer {
+  border-top: 0.2em solid darkblue;
+  padding: 0 3%;
+  width: 94%;
+}
+
+@media all and (max-width: 400px) {
+  body {
+    margin: 1% 2%;
+    width: 96%;
+    font-size: 90%;
+  }
+  
+  table {
+    margin: 1.5em 10%;
+    width: 80%;
+  }
+  
+  .calculator tr {
+    flex-direction: column;
+  }
+  
+  .calculator td {
+    padding: 0.2em 0;
+    width: 100%;
+  }
+  
+  .calculator td input {
+    margin-bottom: 0.3em;
+    height: 3em;
+  }
+  
+  .calculator td:nth-child(1) {
+    text-align: left;
+  }
+}
