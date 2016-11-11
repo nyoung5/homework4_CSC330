@@ -3,25 +3,8 @@
   <tlib-version>1.0</tlib-version>
   <short-name>currency</short-name>
   <uri>/WEB-INF/currency</uri>
-  <!-- A validator verifies that the tags are used correctly at JSP
-        translation time. Validator entries look like this: 
-     <validator>
-         <validator-class>com.mycompany.TagLibValidator</validator-class>
-         <init-param>
-            <param-name>parameter</param-name>
-            <param-value>value</param-value>
-         </init-param>
-     </validator>
-  -->
-  <!-- A tag library can register Servlet Context event listeners in
-       case it needs to react to such events. Listener entries look
-       like this: 
-    <listener>
-        <listener-class>com.mycompany.TagLibListener</listener-class> 
-    </listener>
-  -->
   <tag>
-    <name>CurrencyFormat</name>
+    <name>currencyFormat</name>
     <tag-class>com.elon.tags.CurrencyFormat</tag-class>
     <body-content>empty</body-content>
     <attribute>

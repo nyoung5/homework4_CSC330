@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 
-<!-- Copyright (c) 2016 Harrison Durant, Nathan Young -->
+<!-- Copyright 2016 © , Nathan Young & Harrison Durant -->  
 
 <%@ include file="/includes/header.html" %>
 

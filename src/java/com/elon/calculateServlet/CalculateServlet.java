@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2016 Harrison Durant, Nathan Young -->
+  Copyright © 2016 Harrison Durant & Nathan Young
 */
 package com.elon.calculateServlet;
 

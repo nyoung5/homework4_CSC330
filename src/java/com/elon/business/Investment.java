@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2016 Harrison Durant, Stephanie Scro -->
+  Copyright © 2016 Harrison Durant & Nathan Young
  */
 package com.elon.business;
 
@@ -15,7 +15,7 @@ public class Investment implements Serializable {
   private double interestRate;
   private int years;
   private double futureValue;
-  
+  private String investmentReturns;
   
   public Investment() {
     this.amount = 0.0;
@@ -89,11 +89,12 @@ public class Investment implements Serializable {
     return value;
   }
   
-  public String getFormattedFutureValue(){
-      return String.format("$%,.2f", this.futureValue);
-  }
-  public String getFormattedAmount(){
-      return String.format("$%,.2f", this.amount);
+  public String getInvestmentReturns() {
+      investmentReturns = "";
+      for(int i = 1; i <= years; i++) {
+          investmentReturns += calculateInvestmentValue(amount, interestRate, i) + "|";
+      }
+      return investmentReturns;
   }
   
 }

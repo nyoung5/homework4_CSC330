@@ -1,7 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file="/includes/header.html" %>
-<%@taglib prefix="elon" uri="WEB-INF/currency.tld" %>
-<elon:CurrencyFormat dollars="800"/>
   <h1>Future Value Calculator</h1>
   
   <p><i>${message}</i></p>
@@ -28,4 +26,5 @@
     </table>
   </form>
 </div>
+
 <%@ include file="/includes/footer.jsp" %>
