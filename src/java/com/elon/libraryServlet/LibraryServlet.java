@@ -1,10 +1,11 @@
 /*
   Copyright © 2016 Harrison Durant & Nathan Young
 */
-package com.elon.calculateServlet;
+package com.elon.libraryServlet;
 
-import com.elon.business.Investment;
+import com.elon.LibraryDB.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.servlet.ServletException;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author harrisondurant
  * @author nathanyoung
  */
-public class CalculateServlet extends HttpServlet {
+public class LibraryServlet extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
@@ -25,7 +26,6 @@ public class CalculateServlet extends HttpServlet {
         
     String url = "/index.jsp";
     String message = "";
-    Investment investment = new Investment();
     
     HttpSession session = request.getSession();
     
@@ -36,37 +36,24 @@ public class CalculateServlet extends HttpServlet {
     String action = request.getParameter("action");
     if (action != null) {
     
-      if (action.equals("calc")) {
+      if (action.equals("checkout")) {
           // get parameters from the request
-         
-        String investmentAmount = request.getParameter("investmentAmount");
-        String yearlyInterestRate = request.getParameter("yearlyInterestRate");
-        String numberOfYears = request.getParameter("numberOfYears");
-
-        try {
-          double amount = Double.parseDouble(investmentAmount);
-          double interest = Double.parseDouble(yearlyInterestRate);
-          int years = Integer.parseInt(numberOfYears);
-
-          if(amount >= 0 && interest >= 0 && years >= 0) {
-            investment = new Investment(amount,interest,years);
-            url = "/futureValue.jsp";
-          }
-          else {
-            message = "Please enter positive numbers.";
-          }
-        }
-        catch(NumberFormatException e) {
-          message = "Please enter only positive numbers.";
-        }
+        url = "/checkout.jsp";
         
-        session.setAttribute("investment",investment);
+      }
+      else if(action.equals("manage")) {
+        System.out.println("@@@@@@MANAGE!");
+        ArrayList<User> users = LibraryDB.selectUsers();
+        
+        for(User user:users){
+        System.out.println(user.getEmail());
+        }
         
       }
     }
     
     
-    request.setAttribute("message", message);
+    //request.setAttribute("message", message);
     //request.setAttribute("investment", investment);
     
     getServletContext()
