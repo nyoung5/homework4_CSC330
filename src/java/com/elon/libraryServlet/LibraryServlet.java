@@ -25,7 +25,6 @@ public class LibraryServlet extends HttpServlet {
             throws ServletException, IOException {
         
     String url = "/index.jsp";
-    String message = "";
     
     HttpSession session = request.getSession();
     
@@ -39,6 +38,15 @@ public class LibraryServlet extends HttpServlet {
       if (action.equals("checkout")) {
           // get parameters from the request
         url = "/checkout.jsp";
+        
+        String bookname = "";
+        //TODO get bookname request.getParameter(bookname)
+        
+        User user = new User("Jeff", "Stein", "jstein@yahoo.com");
+        //LibraryDB.checkout(user, "Crafting Olympia");
+         
+        LibraryDB.insert(user);
+        
         
       }
       else if(action.equals("manage")) {

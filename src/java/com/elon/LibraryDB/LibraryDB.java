@@ -21,7 +21,7 @@ import java.util.GregorianCalendar;
 public class LibraryDB {
   
   
-  //TODO: Do the dates and stuff pls 
+  //TODO: Do the dates
   public static void checkout(User user, String bookname) {
         
         if(!emailExists(user.getEmail())) {
@@ -34,30 +34,47 @@ public class LibraryDB {
 
         String query
                 = "INSERT INTO checkout"
-                + "VALUES (?, ?, ?, ?)";
+                + "VALUES (?, ?, ?, ?";
         try {
             ps = connection.prepareStatement(query);
             
-            GregorianCalendar currentDate = new GregorianCalendar();
-            int currentYear = currentDate.get(Calendar.YEAR);
-            int currentMonth = currentDate.get(Calendar.MONTH);
-            int currentDay = currentDate.get(Calendar.DAY_OF_MONTH);
             
-            java.util.Date checkoutDate = new java.util.Date();
-            java.sql.Date sqlDate = new java.sql.Date(checkoutDate.getTime());
+            //Source for dates: http://stackoverflow.com/questions/3350893/
+            //how-to-insert-current-date-and-time-in-a-database-using-sql
+            // and http://stackoverflow.com/questions/1005523/how-to-add-
+            //one-day-to-a-date
+            
+            //create java date based on current Time.
+            java.util.Date jcheckoutDate = new Date();
+            
+            //Calendar for adding 2 weeks
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(jcheckoutDate);
+            calendar.add(Calendar.DATE, 14);
+            
+            java.util.Date jdueDate = calendar.getTime();
+            
+//    TEST        System.out.println("checkout date: " + jcheckoutDate.getTime());
+//            System.out.println("due date: " + jdueDate.getTime());
+          
+            
+            //create date based on miliseconds passed in from date
+            java.sql.Date checkoutDate = new java.sql.Date(jcheckoutDate.getTime());
+            java.sql.Date dueDate = new java.sql.Date(jdueDate.getTime());
            
+//    TEST        System.out.println("sql checkout date: " + checkoutDate);
+//            System.out.println("sql due date: " + dueDate);
             
-            currentDate.add(Calendar.DAY_OF_WEEK, 14);
-            System.out.print(currentDate.toString());
             ps.setDate(1, checkoutDate);
-            ps.setDate(2, checkoutDate);
-            ps.setString(2, user.getLastName());
+            ps.setDate(2, dueDate);
             ps.setString(3, user.getEmail());
+            ps.setString(4, bookname);
+            
 
-            return ps.executeUpdate();
+            ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
-            return 0;
+            System.out.println("problem with checking out book");
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
@@ -93,7 +110,7 @@ public class LibraryDB {
         PreparedStatement ps = null;
 
         String query
-                = "INSERT INTO user"
+                = "INSERT INTO user (first_name,last_name,email)"
                 + "VALUES (?, ?, ?)";
         try {
             ps = connection.prepareStatement(query);
