@@ -31,13 +31,13 @@ tr {
   display: flex; 
 }
 
-td {
+td, th {
   flex-basis: 50%;
   padding: 0.4em 0.5em;
   width: 50%;
 }
 
-td p {
+td {
   margin: 0;
   text-align: left;
 }
@@ -75,21 +75,21 @@ td input[type="submit"] {
     width: 96%;
   }
   
-  .calculator tr {
+  .library_table tr {
     flex-direction: column;
   }
   
-  .calculator td {
+  .library_table td {
     padding: 0.2em 0;
     width: 100%;
   }
   
-  .calculator td input {
+  .library_table td input {
     margin-bottom: 0.3em;
     height: 3em;
   }
   
-  .calculator td:nth-child(1) {
+  .library_table td:nth-child(1) {
     text-align: left;
   }
 }

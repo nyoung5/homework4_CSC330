@@ -5,9 +5,12 @@ package com.elon.libraryServlet;
 
 import com.elon.LibraryDB.*;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
@@ -25,6 +28,7 @@ public class LibraryServlet extends HttpServlet {
             throws ServletException, IOException {
         
     String url = "/index.jsp";
+    String message = "";
     
     HttpSession session = request.getSession();
     
@@ -39,24 +43,39 @@ public class LibraryServlet extends HttpServlet {
           // get parameters from the request
         url = "/checkout.jsp";
         
-        String bookname = "";
+        //String bookname = "";
         //TODO get bookname request.getParameter(bookname)
         
-        User user = new User("Jeff", "Stein", "jstein@yahoo.com");
+        //User user = new User("Jeff", "Stein", "jstein@yahoo.com");
         //LibraryDB.checkout(user, "Crafting Olympia");
          
-        LibraryDB.insert(user);
-        
-        
+        //LibraryDB.insert(user);
       }
       else if(action.equals("manage")) {
-        System.out.println("@@@@@@MANAGE!");
-        ArrayList<User> users = LibraryDB.selectUsers();
+        String results = LibraryDB.getCheckouts();
+        request.setAttribute("checkoutTable", results);
+        url = "/manage.jsp";
+      }
+      else if(action.equals("process_checkout")) {
+        String first = request.getParameter("firstname");
+        String last = request.getParameter("lastname");
+        String email = request.getParameter("email");
+        String bookTitle = request.getParameter("title");
+        User user = new User(first,last,email);
+        String libraryResponse = LibraryDB.checkout(user,bookTitle);
         
-        for(User user:users){
-        System.out.println(user.getEmail());
+        if(libraryResponse.length() != 0) {
+          request.setAttribute("message",libraryResponse);
+          url = "/checkout.jsp";
+        } 
+        else {
+          url = "/thanks.jsp";
         }
-        
+      }
+      else { //default case -- action is to check in a book
+        String bookTitle = action;
+        LibraryDB.checkIn(bookTitle);
+        url = "/library?action=manage";
       }
     }
     
