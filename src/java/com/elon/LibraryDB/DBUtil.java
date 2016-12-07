@@ -56,6 +56,7 @@ public class DBUtil {
             htmlTable.append(metaData.getColumnLabel(i));
             htmlTable.append("</th>");
         }
+        htmlTable.append("<th></th>");
         htmlTable.append("</tr>");
         
         // add all other rows
