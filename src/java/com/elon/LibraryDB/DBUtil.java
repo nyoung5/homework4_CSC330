@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.elon.LibraryDB;
 
 import java.sql.*;
 
 /**
  *
- * @author nyoung5
+ * @author Nathan Young
  */
 public class DBUtil {
   public static void closeStatement(Statement s) {

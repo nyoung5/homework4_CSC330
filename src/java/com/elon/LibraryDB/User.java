@@ -1,13 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.elon.LibraryDB;
 
 /**
  *
- * @author nyoung5
+ * @author Nathan Young
+ * @author Harrison Durant
+ * Represents a user - used for placing in database
  */
 
 import java.io.Serializable;

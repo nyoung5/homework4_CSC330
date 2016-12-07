@@ -2,6 +2,24 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Users/nyoung5/NetBeansProjects/homework4_CSC330/src/java/com/elon/LibraryDB/DBUtil.java</file>
+            <file>file:/Users/nyoung5/NetBeansProjects/homework4_CSC330/web/WEB-INF/web.xml</file>
+            <file>file:/Users/nyoung5/NetBeansProjects/homework4_CSC330/web/checkout.jsp</file>
+            <file>file:/Users/nyoung5/NetBeansProjects/homework4_CSC330/src/java/com/elon/LibraryDB/ConnectionPool.java</file>
+            <file>file:/Users/nyoung5/NetBeansProjects/homework4_CSC330/src/java/com/elon/libraryServlet/LibraryServlet.java</file>
+            <file>file:/Users/nyoung5/NetBeansProjects/homework4_CSC330/src/java/com/elon/LibraryDB/LibraryDB.java</file>
+            <file>file:/Users/nyoung5/NetBeansProjects/homework4_CSC330/src/java/com/elon/LibraryDB/User.java</file>
+            <file>file:/Users/nyoung5/NetBeansProjects/homework4_CSC330/web/manage.jsp</file>
+            <file>file:/Users/nyoung5/NetBeansProjects/homework4_CSC330/web/includes/header.html</file>
+            <file>file:/Users/nyoung5/NetBeansProjects/homework4_CSC330/web/index.jsp</file>
+            <file>file:/Users/nyoung5/NetBeansProjects/homework4_CSC330/web/META-INF/context.xml</file>
+            <file>file:/Users/nyoung5/NetBeansProjects/homework4_CSC330/web/thanks.jsp</file>
+            <file>file:/Users/nyoung5/NetBeansProjects/homework4_CSC330/web/index.html</file>
+            <file>file:/Users/nyoung5/NetBeansProjects/homework4_CSC330/web/styles/main.css</file>
+            <file>file:/Users/nyoung5/NetBeansProjects/homework4_CSC330/web/exception.jsp</file>
+            <file>file:/Users/nyoung5/NetBeansProjects/homework4_CSC330/web/includes/footer.jsp</file>
+            <file>file:/Users/nyoung5/NetBeansProjects/homework4_CSC330/web/error404.jsp</file>
+        </group>
     </open-files>
 </project-private>

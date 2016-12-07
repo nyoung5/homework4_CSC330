@@ -1,25 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.elon.LibraryDB;
-
 
 import java.util.Date;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 /**
  * 
- * @author nyoung5
+ * @author Nathan Young
+ * @author Harrison Durant
+ * 
+ * Library database talks with the SQL database 
+ * Manages books, users and checkouts
  */
 public class LibraryDB {
   
-  
-  //TODO: Do the dates
+/**
+ * Updates the table to check out a book
+ * @param user person checking out the book
+ * @param bookTitle title of the book to be checked out
+ * @return if checkout successful, emptystring, if unsuccessful, error message
+ */
   public static String checkout(User user, String bookTitle) {
         
         if(!emailExists(user.getEmail())) {
@@ -38,11 +38,11 @@ public class LibraryDB {
         PreparedStatement ps = null;
 
         String query
-                = "INSERT INTO checkout (checkout_date,due_date,user_email,book_name)"
+                = "INSERT INTO checkout (checkout_date,"
+                + "due_date,user_email,book_name)"
                 + "VALUES (?, ?, ?, ?)";
         try {
             ps = connection.prepareStatement(query);
-            
             
             //Source for dates: http://stackoverflow.com/questions/3350893/
             //how-to-insert-current-date-and-time-in-a-database-using-sql
@@ -59,16 +59,10 @@ public class LibraryDB {
             
             java.util.Date jdueDate = calendar.getTime();
             
-//    TEST        System.out.println("checkout date: " + jcheckoutDate.getTime());
-//            System.out.println("due date: " + jdueDate.getTime());
-            
             //create date based on miliseconds passed in from date
             java.sql.Date checkoutDate = new java.sql.Date(jcheckoutDate.getTime());
             java.sql.Date dueDate = new java.sql.Date(jdueDate.getTime());
            
-//    TEST        System.out.println("sql checkout date: " + checkoutDate);
-//            System.out.println("sql due date: " + dueDate);
-            
             ps.setDate(1, checkoutDate);
             ps.setDate(2, dueDate);
             ps.setString(3, user.getEmail());
@@ -86,6 +80,12 @@ public class LibraryDB {
         }
   }
 
+  /**
+   * Checks the status of the 
+   * 
+   * @param email e-mail to check if in database
+   * @return boolean saying whether or not the email exists
+   */
   public static boolean emailExists(String email) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -109,6 +109,12 @@ public class LibraryDB {
         }
     }
   
+  /**
+   * Checks if the book exists in database
+   * 
+   * @param bookTitle name of book to check if in database
+   * @return boolean stating if the book exists or not
+   */
   public static boolean bookExists(String bookTitle) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -132,6 +138,11 @@ public class LibraryDB {
         }
   }
   
+  /**
+   * Checks to see if a book is checked out
+   * @param bookTitle book to check in database
+   * @return boolean representing whether or not the book is checked out 
+   */
   public static boolean isCheckedOut(String bookTitle) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -156,7 +167,10 @@ public class LibraryDB {
             pool.freeConnection(connection);
         }
     }
-  
+  /**
+   * Checks in a book by deleting it from the database
+   * @param bookTitle the book to be checked in 
+   */
     public static void checkIn(String bookTitle) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -200,7 +214,11 @@ public class LibraryDB {
         }
     }
   
-  public static int insertUser(User user) {
+  /**
+   * Inserts a user into the database
+   * @param user user object to be inserted into database
+   */
+  public static void insertUser(User user) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -215,17 +233,20 @@ public class LibraryDB {
             ps.setString(2, user.getLastName());
             ps.setString(3, user.getEmail());
 
-            return ps.executeUpdate();
+            ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
-            return 0;
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
   }
 
-    public static int delete(User user) {
+  /**
+   * deletes a user from the database
+   * @param user user to be deleted
+   */
+    public static void delete(User user) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -234,21 +255,20 @@ public class LibraryDB {
                 + "WHERE Email = ?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1, user.getEmail());
-
-            return ps.executeUpdate();
+            ps.setString(1, user.getEmail());;
         } catch (SQLException e) {
             System.out.println(e);
-            return 0;
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
     }
     
-    
+/**
+ * Returns all the checked out books and people associated with them
+ * @return String with all the users in a table
+ */
  public static String getCheckouts() {
-        // add code that returns an ArrayList<User> object of all users in the User table
         
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
